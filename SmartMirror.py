@@ -19,6 +19,7 @@ class GUI(Frame):
     def setupGUI(self):
         self.pack(fill=BOTH, expand=1)
 
+        # Time frame
         time_frame = Frame(self, width=400, height=105)
         GUI.textTime = Text(time_frame, bg='black', fg='white', font=self.largeFont, bd=0, highlightbackground='black')
         GUI.textTime.pack()
@@ -32,7 +33,7 @@ class GUI(Frame):
         date_frame.pack(side=TOP, anchor=NE)
         date_frame.pack_propagate(False)
 
-        #self.configure(background='black')
+        self.configure(background='black')
         #Do stuff to setup gui here
 
     def updateGUI(self):
@@ -45,7 +46,7 @@ class GUI(Frame):
         GUI.textDate.config(state=NORMAL)
         GUI.textDate.delete("1.0", END)
         GUI.textDate.insert(END, strftime("%A, %B %d", time.localtime()))
-        
+
         window.after(1000, mirror.updateGUI)
 
 
