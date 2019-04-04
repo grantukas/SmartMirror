@@ -34,8 +34,10 @@ class GUI(Frame):
         date_frame.pack_propagate(False)
 
         # Weather Icon
-        weather_icon_frame = Frame(self, width=400, height=400)
-        icon = PhotoImage(file="weather_icons/clear.png")
+        weather_icon_canvas = Canvas(width = 300, height = 200, bg = 'yellow')
+        weather_icon_canvas.pack(expand = YES, fill = BOTH)
+        icon = PhotoImage(file="weather_icons/clear.gif")
+        weather_icon_canvas.create_image(50, 10, image = icon, anchor = SW)
 
         self.configure(background='black')
         #Do stuff to setup gui here
