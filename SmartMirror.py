@@ -7,53 +7,62 @@ from time import strftime
 WIDTH = 800
 HEIGHT = 600
 
+
 class GUI(Frame):
 
     def __init__(self, master):
         Frame.__init__(self, master)
 
         self.largeFont = tkinter.font.Font(family="PibotoLt", size=70)
+        self.mediumFont = tkinter.font.Font(family="PibotoLt", size=40)
         self.normalFont = tkinter.font.Font(family="PibotoLt", size=20)
         self.smallFont = tkinter.font.Font(family="PibotoLt", size=6)
 
     def setupGUI(self):
-        self.pack(fill=BOTH, expand=1)
+        self.grid(row=0, column=0)
 
-        # Time frame
-        time_frame = Frame(self, width=400, height=105)
-        GUI.textTime = Text(time_frame, bg='black', fg='white', font=self.largeFont, bd=0, highlightbackground='black')
-        GUI.textTime.pack()
-        time_frame.pack(side=TOP, anchor=NE)
-        time_frame.pack_propagate(False)
+        # Weather & news frame to contain weather/news info
+        # For weather, column 0 = info, column 1 = icon
+        weather_news_frame = Frame(self, width=400, height=500, bg='black')
+        weather_news_frame.grid(row=0, column=0)
 
-        #Date frame
-        date_frame = Frame(self, width=400, height=50)
-        GUI.textDate = Text(date_frame, bg='black', fg='white', font=self.normalFont, bd=0, highlightbackground='black')
-        GUI.textDate.pack()
-        date_frame.pack(side=TOP, anchor=NE)
-        date_frame.pack_propagate(False)
+        GUI.weather_label1 = Label(weather_news_frame, text="Weather today", fg='white', bg='black',
+                                   font=self.mediumFont)
+        GUI.weather_label1.grid(row=0, column=0)
 
-        # Weather Icon
-        weather_icon_canvas = Canvas(width = 300, height = 200, bg = 'yellow')
-        weather_icon_canvas.pack(expand = YES, fill = BOTH)
         icon = PhotoImage(file="weather_icons/clear.gif")
-        weather_icon_canvas.create_image(50, 10, image = icon, anchor = SW)
+        icon = icon.subsample(8)
+        icon_label = Label(weather_news_frame, borderwidth=0, image=icon)
+        icon_label.photo = icon
+        icon_label.grid(row=0, column=1)
+
+        # Adjust this width for spacing
+        frame_placeholder = Frame(self, width=300, height=10, bg='black')
+        frame_placeholder.grid(row=0, column=1)
+
+        # Time frame to hold time & date in grid
+        time_frame = Frame(self, width=400, height=500, bg='black')
+        time_frame.grid(row=0, column=2, sticky=E)
+        GUI.time_label = Label(time_frame, text=strftime("%I:%M %p", time.localtime()), fg='white', bg='black',
+                               font=self.largeFont)
+        GUI.time_label.grid(row=0, column=0, sticky=E)
+
+        GUI.date_label = Label(time_frame, text=strftime("%A, %B %d", time.localtime()), fg='white', bg='black',
+                               font=self.normalFont)
+        GUI.date_label.grid(row=1, column=0, sticky=E)
 
         self.configure(background='black')
-        #Do stuff to setup gui here
 
     def updateGUI(self):
         # Constantly updates the time until the program is stopped
-        GUI.textTime.config(state=NORMAL)
-        GUI.textTime.delete("1.0", END)
-        GUI.textTime.insert(END, strftime("%I:%M %p", time.localtime()))
-
-
-        GUI.textDate.config(state=NORMAL)
-        GUI.textDate.delete("1.0", END)
-        GUI.textDate.insert(END, strftime("%A, %B %d", time.localtime()))
+        GUI.time_label.configure(text=strftime("%I:%M %p", time.localtime()))
+        GUI.date_label.configure(text=strftime("%A, %B %d", time.localtime()))
 
         window.after(1000, mirror.updateGUI)
+
+    def updateWeather(self):
+        GUI.weather_label1.configure(text=strftime("Updated weather %S", time.localtime()))
+        window.after(50000, mirror.updateWeather)
 
 
 window = Tk()
@@ -67,4 +76,5 @@ window.configure(background='black')
 mirror = GUI(window)
 mirror.setupGUI()
 window.after(1000, mirror.updateGUI)
+window.after(1000, mirror.updateWeather)
 window.mainloop()
