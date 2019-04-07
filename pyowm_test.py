@@ -1,6 +1,5 @@
 import pyowm
 
-
 owm = pyowm.OWM('1819a58f535dffa60f13ee3f3e8ebcfa')  # You MUST provide a valid API key
 
 # Have a pro subscription? Then use:
