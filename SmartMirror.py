@@ -4,9 +4,9 @@ import tkinter.font
 import time
 from time import strftime
 
+
 WIDTH = 800
 HEIGHT = 600
-
 
 class GUI(Frame):
 

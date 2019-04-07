@@ -7,8 +7,22 @@ owm = pyowm.OWM('1819a58f535dffa60f13ee3f3e8ebcfa')  # You MUST provide a valid 
 # owm = pyowm.OWM(API_key='your-API-key', subscription_type='pro')
 
 # Search for current weather in London (Great Britain)
-observation = owm.weather_at_place('Los Gatos,USA')
+observation = owm.weather_at_place('92866,us')
 w = observation.get_weather()
+
+# Forecast test
+fc = owm.three_hours_forecast('92866,us')
+forecast = fc.get_forecast()
+wlist = forecast.get_weathers()
+
+weather = wlist[0]
+
+temp_min_list = []
+for w in forecast:
+    print(w.get_reference_time(timeformat='iso'))
+    print(w.get_temperature('fahrenheit'))
+    print('\n')
+
 #print(w)                      # <Weather - reference time=2013-12-18 09:20,
                               # status=Clouds>
 
@@ -19,6 +33,9 @@ w = observation.get_weather()
 #print(w.get_temperature('fahrenheit'))
 
 temp_dict = w.get_temperature('fahrenheit')
+print(w.get_reference_time(timeformat='iso'))
+
+
 curr_temp = temp_dict['temp']
 max_temp = temp_dict['temp_max']
 min_temp = temp_dict['temp_min']
