@@ -27,43 +27,19 @@ class GUI(Frame):
     def setupGUI(self):
         self.grid(row=0, column=0)
 
-        weekday = date.today()
-        daily_summary = ''
-        weather_today = ''
-        weather_info = ''
-
-        counter = 0
-        with forecast(key, *ORANGE) as orange:
-            daily_summary += orange.daily.summary
-            for day in orange.daily:
-                day = dict(day=date.strftime(weekday, '%a'),
-                           sum=day.summary,
-                           tempMin=day.temperatureMin,
-                           tempMax=day.temperatureMax,
-                           icon=day.icon
-                           )
-                # Save each of these in a list to display to GUI
-                if counter == 0:
-                    weather_today += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
-                    weekday += timedelta(days=1)
-                    counter += 1
-                else:
-                    weather_info += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
-                    weekday += timedelta(days=1)
-                    counter += 1
 
         # Weather & news frame to contain weather/news info
         # For weather, column 0 = info, column 1 = icon
         weather_news_frame = Frame(self, width=400, height=500, bg='black')
         weather_news_frame.grid(row=0, column=0)
 
-        GUI.weather_label1 = Label(weather_news_frame, text=weather_today, fg='white', bg='black',
-                                   font=self.mediumFont)
-        GUI.weather_label1.grid(row=0, column=0)
+        GUI.weather_label1 = Label(weather_news_frame, text="Loading weather...", fg='white', bg='black',
+                                   font=self.normalFont, justify=LEFT)
+        GUI.weather_label1.grid(row=0, column=0, sticky=W)
 
-        GUI.weather_label2 = Label(weather_news_frame, text=weather_info, fg='white', bg='black',
-                                   font=self.normalFont)
-        GUI.weather_label2.grid(row=1, column=0)
+        GUI.weather_label2 = Label(weather_news_frame, text="Loading weather...", fg='white', bg='black',
+                                   font=self.normalFont, justify=LEFT)
+        GUI.weather_label2.grid(row=1, column=0, sticky=W)
 
         icon = PhotoImage(file="weather_icons/clear-day.gif")
         icon = icon.subsample(8)
@@ -87,8 +63,7 @@ class GUI(Frame):
         GUI.date_label.grid(row=1, column=0, sticky=E)
 
 
-
-        self.configure(background='black')
+        #self.configure(background='black')
 
     def updateGUI(self):
         # Constantly updates the time until the program is stopped
@@ -115,11 +90,11 @@ class GUI(Frame):
                            )
                 # Save each of these in a list to display to GUI
                 if counter == 0:
-                    weather_today += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
+                    weather_today += ('{day}: High {tempMax} | Low {tempMin}\t {icon}\n'.format(**day))
                     weekday += timedelta(days=1)
                     counter += 1
                 else:
-                    weather_info += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
+                    weather_info += ('{day}: High {tempMax} | Low {tempMin}\t {icon}\n'.format(**day))
                     weekday += timedelta(days=1)
                     counter += 1
 
