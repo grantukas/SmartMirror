@@ -3,10 +3,16 @@ from tkinter import *
 import tkinter.font
 import time
 from time import strftime
+from darksky import forecast
+from datetime import date, timedelta
 
 
 WIDTH = 800
 HEIGHT = 600
+
+key = '93a522f375502ea4e4a091c06d034ff1'
+ORANGE = 33.779638, (-117.853700)
+
 
 class GUI(Frame):
 
@@ -21,20 +27,49 @@ class GUI(Frame):
     def setupGUI(self):
         self.grid(row=0, column=0)
 
+        weekday = date.today()
+        daily_summary = ''
+        weather_today = ''
+        weather_info = ''
+
+        counter = 0
+        with forecast(key, *ORANGE) as orange:
+            daily_summary += orange.daily.summary
+            for day in orange.daily:
+                day = dict(day=date.strftime(weekday, '%a'),
+                           sum=day.summary,
+                           tempMin=day.temperatureMin,
+                           tempMax=day.temperatureMax,
+                           icon=day.icon
+                           )
+                # Save each of these in a list to display to GUI
+                if counter == 0:
+                    weather_today += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
+                    weekday += timedelta(days=1)
+                    counter += 1
+                else:
+                    weather_info += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
+                    weekday += timedelta(days=1)
+                    counter += 1
+
         # Weather & news frame to contain weather/news info
         # For weather, column 0 = info, column 1 = icon
         weather_news_frame = Frame(self, width=400, height=500, bg='black')
         weather_news_frame.grid(row=0, column=0)
 
-        GUI.weather_label1 = Label(weather_news_frame, text="Weather today", fg='white', bg='black',
+        GUI.weather_label1 = Label(weather_news_frame, text=weather_today, fg='white', bg='black',
                                    font=self.mediumFont)
         GUI.weather_label1.grid(row=0, column=0)
 
-        icon = PhotoImage(file="weather_icons/clear.gif")
+        GUI.weather_label2 = Label(weather_news_frame, text=weather_info, fg='white', bg='black',
+                                   font=self.normalFont)
+        GUI.weather_label2.grid(row=1, column=0)
+
+        icon = PhotoImage(file="weather_icons/clear-day.gif")
         icon = icon.subsample(8)
         icon_label = Label(weather_news_frame, borderwidth=0, image=icon)
         icon_label.photo = icon
-        icon_label.grid(row=0, column=1)
+        icon_label.grid(row=0, column=1, sticky=W)
 
         # Adjust this width for spacing
         frame_placeholder = Frame(self, width=300, height=10, bg='black')
@@ -51,6 +86,8 @@ class GUI(Frame):
                                font=self.normalFont)
         GUI.date_label.grid(row=1, column=0, sticky=E)
 
+
+
         self.configure(background='black')
 
     def updateGUI(self):
@@ -61,7 +98,33 @@ class GUI(Frame):
         window.after(1000, mirror.updateGUI)
 
     def updateWeather(self):
-        GUI.weather_label1.configure(text=strftime("Updated weather %S", time.localtime()))
+        weekday = date.today()
+        daily_summary = ''
+        weather_today = ''
+        weather_info = ''
+
+        counter = 0
+        with forecast(key, *ORANGE) as orange:
+            daily_summary += orange.daily.summary
+            for day in orange.daily:
+                day = dict(day=date.strftime(weekday, '%a'),
+                           sum=day.summary,
+                           tempMin=day.temperatureMin,
+                           tempMax=day.temperatureMax,
+                           icon=day.icon
+                           )
+                # Save each of these in a list to display to GUI
+                if counter == 0:
+                    weather_today += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
+                    weekday += timedelta(days=1)
+                    counter += 1
+                else:
+                    weather_info += ('{day} High: {tempMax} | Low: {tempMin}\t {icon}\n'.format(**day))
+                    weekday += timedelta(days=1)
+                    counter += 1
+
+        GUI.weather_label1.configure(text=weather_today)
+        GUI.weather_label2.configure(text=weather_info)
         window.after(50000, mirror.updateWeather)
 
 

@@ -16,5 +16,6 @@ with forecast(key, *ORANGE) as orange:
                    tempMax = day.temperatureMax,
                    icon = day.icon
                    )
+        # Save each of these in a list to display to GUI
         print('{day}: {sum} Temp range: {tempMin} - {tempMax}\t {icon}'.format(**day))
         weekday += timedelta(days=1)
