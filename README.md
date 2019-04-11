@@ -4,6 +4,8 @@
 
 [Tkinter documentation](https://effbot.org/tkinterbook/tkinter-index.htm)
 
+[Dark Sky API docs](https://darksky.net/dev/docs)
+
 **news-api links**
 - http://www.rychdata.com/the-news-api-requesting-live-headlines-with-python.html
 
