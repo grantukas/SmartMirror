@@ -1,4 +1,3 @@
-import http
 from tkinter import *
 import tkinter.font
 import time
@@ -29,12 +28,15 @@ class GUI(Frame):
 
         # Weather & news frame to contain weather/news info
         # For weather, column 0 = info, column 1 = icon
-        weather_news_frame = Frame(self, width=400, height=500, bg='black')
-        weather_news_frame.grid(row=0, column=0)
-
-        GUI.weather_label1 = Label(weather_news_frame, text="Loading weather...", fg='white', bg='black',
+        today_weather_frame = Frame(self, width=400, height=500, bg='black')
+        today_weather_frame.grid(row=0, column=0, sticky=W)
+        GUI.weather_label1 = Label(today_weather_frame, text="Loading weather...", fg='white', bg='black',
                                    font=self.normalFont, justify=LEFT)
-        GUI.weather_label1.grid(row=0, column=0, sticky=W)
+        GUI.weather_label1.grid(row=0, column=0, sticky=NW)
+
+        weather_news_frame = Frame(self, width=200, height=500, bg='black')
+        weather_news_frame.grid(row=1, column=0, sticky=W)
+
         GUI.weather_label2 = Label(weather_news_frame, text="Loading weather...", fg='white', bg='black',
                                    font=self.normalFont, justify=LEFT)
         GUI.weather_label2.grid(row=1, column=0, sticky=W)
@@ -60,8 +62,8 @@ class GUI(Frame):
         icon = PhotoImage(file="weather_icons/partly-cloudy-day.gif")
         icon = icon.subsample(10)
 
-        #Set up labels to hold weather icons
-        GUI.icon_label = Label(weather_news_frame, borderwidth=0, image=icon)
+        # Set up labels to hold weather icons
+        GUI.icon_label = Label(today_weather_frame, borderwidth=0, image=icon)
         GUI.icon_label.photo = icon
         GUI.icon_label.grid(row=0, column=1, sticky=W)
         GUI.icon_label2 = Label(weather_news_frame, borderwidth=0, image=icon)
@@ -78,6 +80,11 @@ class GUI(Frame):
         GUI.icon_label7.grid(row=6, column=1, sticky=W)
         GUI.icon_label8 = Label(weather_news_frame, borderwidth=0, image=icon)
         GUI.icon_label8.grid(row=7, column=1, sticky=W)
+
+        # Labels to hold news info
+        GUI.news_label = Label(weather_news_frame, text="\n\nToday's headlines:", fg='white', bg='black',
+                               font=self.mediumFont, justify=LEFT)
+        GUI.news_label.grid(row=8, column=0, sticky=W)
 
         # Adjust this width for spacing
         frame_placeholder = Frame(self, width=300, height=10, bg='black')
@@ -104,6 +111,7 @@ class GUI(Frame):
         window.after(1000, mirror.updateGUI)
 
     def updateWeather(self):
+        # Updates the weather information
         weekday = date.today()
         daily_summary = ''
         weather_today = ''
@@ -111,6 +119,7 @@ class GUI(Frame):
         today_icon = ''
         icons_list = []
 
+        # Gets weather info
         counter = 0
         with forecast(key, *ORANGE) as orange:
             daily_summary += orange.daily.summary
@@ -135,6 +144,7 @@ class GUI(Frame):
 
         GUI.weather_label1.configure(text=weather_today)
 
+        # Set icon for weather today
         icon_path = 'weather_icons/'
         today_icon += '.gif'
         icon_path += today_icon
@@ -143,6 +153,7 @@ class GUI(Frame):
         GUI.icon_label.configure(image=icon)
         GUI.icon_label.photo = icon
 
+        # Push updated weather info to each label along with icons
         for x in range(0, len(weather_list)):
             temp_icon_path = 'weather_icons/'
             temp_icon_name = icons_list[x]
@@ -151,7 +162,6 @@ class GUI(Frame):
             temp_icon = PhotoImage(file=temp_icon_path)
             temp_icon = temp_icon.subsample(10)
 
-            print(temp_icon_path)
             if x == 0:
                 GUI.weather_label2.configure(text=weather_list[x])
                 GUI.icon_label2.configure(image=temp_icon)
