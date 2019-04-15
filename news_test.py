@@ -13,6 +13,6 @@ import pandas as pd
 data = pd.DataFrame.from_dict(data)
 data = pd.concat([data.drop(['articles'], axis=1), data['articles'].apply(pd.Series)], axis=1)
 
-data.head()
+#data.head()
 
-data.drop(columns=['status', 'source','sortBy','author','url','urlToImage','publishedAt'])
+print (data.drop(columns=['status', 'source','sortBy','author','url','urlToImage','publishedAt']))
