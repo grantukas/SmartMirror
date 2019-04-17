@@ -4,13 +4,19 @@ import time
 from time import strftime
 from darksky import forecast
 from datetime import date, timedelta
-
+import pandas as pd
+from newsapi.articles import Articles
 
 WIDTH = 800
 HEIGHT = 600
 
+# Weather API credentials
 key = '93a522f375502ea4e4a091c06d034ff1'
 ORANGE = 33.779638, (-117.853700)
+
+# News API credentials
+apikey = '455e01c84ca44ff387187f10f202bed3'
+a = Articles(API_KEY=apikey)
 
 
 class GUI(Frame):
@@ -34,6 +40,7 @@ class GUI(Frame):
                                    font=self.normalFont, justify=LEFT)
         GUI.weather_label1.grid(row=0, column=0, sticky=NW)
 
+        # Frame to hold the forecast
         weather_news_frame = Frame(self, width=200, height=500, bg='black')
         weather_news_frame.grid(row=1, column=0, sticky=W)
 
@@ -82,9 +89,16 @@ class GUI(Frame):
         GUI.icon_label8.grid(row=7, column=1, sticky=W)
 
         # Labels to hold news info
-        GUI.news_label = Label(weather_news_frame, text="\n\nToday's headlines:", fg='white', bg='black',
+        news_frame = Frame(self, width=400, height=500, bg='black')
+        news_frame.grid(row=2, column=0, sticky=W)
+
+        GUI.news_today = Label(news_frame, text="\nToday's headlines:", fg='white', bg='black',
                                font=self.mediumFont, justify=LEFT)
-        GUI.news_label.grid(row=8, column=0, sticky=W)
+        GUI.news_today.grid(row=0, column=0, sticky=W)
+
+        GUI.news_label1 = Label(news_frame, text="Loading headlines...", fg='white', bg='black',
+                                   font=self.normalFont, justify=LEFT)
+        GUI.news_label1.grid(row=1, column=0, sticky=W)
 
         # Adjust this width for spacing
         frame_placeholder = Frame(self, width=300, height=10, bg='black')
@@ -193,6 +207,28 @@ class GUI(Frame):
 
         window.after(500000, mirror.updateWeather)
 
+    def updateNews(self):
+        data = a.get(source="the-new-york-times", sort_by='top')
+
+        data = pd.DataFrame.from_dict(data)
+        data = pd.concat([data.drop(['articles'], axis=1), data['articles'].apply(pd.Series)], axis=1)
+        news_df = data.drop(columns=['status', 'source', 'sortBy', 'author', 'url', 'urlToImage', 'publishedAt'])
+
+        title_list = news_df["title"].tolist()
+        desc_list = news_df["description"].tolist()
+
+        head1 = [title_list[0], desc_list[0]]
+        head2 = [title_list[1], desc_list[1]]
+        head3 = [title_list[2], desc_list[2]]
+        head4 = [title_list[3], desc_list[3]]
+        head5 = [title_list[4], desc_list[4]]
+        head6 = [title_list[5], desc_list[5]]
+        head7 = [title_list[6], desc_list[6]]
+
+        GUI.news_label1.configure(text=title_list[0])
+
+        window.after(1000, mirror.updateNews)
+
 
 window = Tk()
 window.title("Test window")
@@ -206,4 +242,5 @@ mirror = GUI(window)
 mirror.setupGUI()
 window.after(1000, mirror.updateGUI)
 window.after(1000, mirror.updateWeather)
+window.after(1000, mirror.updateNews())
 window.mainloop()
