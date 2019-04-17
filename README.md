@@ -8,4 +8,4 @@
 
 [News Api](http://www.rychdata.com/the-news-api-requesting-live-headlines-with-python.html)
 
-[Calander API]https://developers.google.com/calendar/quickstart/python
+[Calander API](https://developers.google.com/calendar/quickstart/python)
