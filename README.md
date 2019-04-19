@@ -10,5 +10,5 @@
 
 [Calander API](https://developers.google.com/calendar/quickstart/python)
 
-(h1) Issues with GoogleAPIClient
+## Issues with GoogleAPIClient
 GoogleAPIClient is deprecated so use the [Google API Client Library for Python](https://developers.google.com/api-client-library/python/)
