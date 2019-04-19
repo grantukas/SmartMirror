@@ -112,7 +112,7 @@ class GUI(Frame):
 
 
         # Adjust this width for spacing
-        frame_placeholder = Frame(self, width=300, height=10, bg='black')
+        frame_placeholder = Frame(self, width=200, height=10, bg='black')
         frame_placeholder.grid(row=0, column=1)
 
         # Time frame to hold time & date in grid
