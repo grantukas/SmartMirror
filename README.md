@@ -9,3 +9,6 @@
 [News Api](http://www.rychdata.com/the-news-api-requesting-live-headlines-with-python.html)
 
 [Calander API](https://developers.google.com/calendar/quickstart/python)
+
+# Issues with GoogleAPIClient
+GoogleAPIClient is deprecated so use the [Google API Client Library for Python](https://developers.google.com/api-client-library/python/)
