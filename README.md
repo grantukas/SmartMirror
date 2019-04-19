@@ -43,13 +43,30 @@ To install Google oauthlib:
 sudo pip3 install google-auth-oauthlib
 ```
 
-### Configure aaspect ratio for your display
+### Configure width and height for your display
 The SmartMirror.py code launches a GUI using Tkinter, a built in Python library. The GUI is launched in fullscreen mode, with no borders to the window. So, you need to make sure that you configure the aspect ratio to that of your screen so everything scales appropriately.
 
-Within the SmartMirror.py file, change:``` WIDTH = 800
-HEIGHT = 600 ``` to the width and height of your display.
+Within the SmartMirror.py file, change the variables WIDTH and HEIGHT:
+```
+WIDTH = X
+HEIGHT = Y
+```
+where X is the width of your display and Y is the height of your display.
+Furthermore, at the bottom of the SmartMirror.py, change window.geometry:
+```
+window.geometry('800x600')
+```
+Replace the values 800 and 600 with the same width and height values that you have above.
+Be sure to leave it in the format '800x600'.
 
-### Set up weather settings to your location
+### OPTIONAL- Set weather location to your location
+The location for weather forecasts can be changed to be something other than Orange, CA.
+To change the location, you must get the latitude and longitude of your location which can be done easily with [LatLong.net](https://www.latlong.net/)
 
+Within the SmartMirror.py file, change the variable ORANGE:
+```
+ORANGE = {LATITUDE}, {LONGITUDE}
+```
+Replace tha values {LATITUDE} and {LONGITUDE} with that of your location.
 
 ### Set up Google Cloud Project to get API access key
