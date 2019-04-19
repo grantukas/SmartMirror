@@ -24,7 +24,7 @@ class GUI(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
 
-        self.largeFont = tkinter.font.Font(family="Roboto Light", size=70)
+        self.largeFont = tkinter.font.Font(family="Roboto Light", size=90)
         self.mediumFont = tkinter.font.Font(family="Roboto Light", size=40)
         self.normalFont = tkinter.font.Font(family="Roboto Thin", size=20)
         self.smallFont = tkinter.font.Font(family="Roboto Thin", size=6)
@@ -126,6 +126,28 @@ class GUI(Frame):
                                font=self.normalFont)
         GUI.date_label.grid(row=1, column=0, sticky=NE)
 
+        # Frame for calendar info
+        calendar_frame = Frame(self, width=400, height=500, bg='black')
+        calendar_frame.grid(row=1, column=2, sticky=NE)
+        GUI.calendar_label0 = Label(calendar_frame, text='\nUpcoming events:', fg='white', bg='black',
+                                    font=self.mediumFont)
+        GUI.calendar_label0.grid(row=0, column=0, sticky=NE)
+        GUI.calendar_label1 = Label(calendar_frame, text='Loading calendar events...', fg='white', bg='black',
+                                    font=self.normalFont)
+        GUI.calendar_label1.grid(row=1, column=0, sticky=NE)
+        GUI.calendar_label2 = Label(calendar_frame, text='Loading calendar events...', fg='white', bg='black',
+                                    font=self.normalFont)
+        GUI.calendar_label2.grid(row=2, column=0, sticky=NE)
+        GUI.calendar_label3 = Label(calendar_frame, text='Loading calendar events...', fg='white', bg='black',
+                                    font=self.normalFont)
+        GUI.calendar_label3.grid(row=3, column=0, sticky=NE)
+        GUI.calendar_label4 = Label(calendar_frame, text='Loading calendar events...', fg='white', bg='black',
+                                    font=self.normalFont)
+        GUI.calendar_label4.grid(row=4, column=0, sticky=NE)
+        GUI.calendar_label5 = Label(calendar_frame, text='Loading calendar events...', fg='white', bg='black',
+                                    font=self.normalFont)
+        GUI.calendar_label5.grid(row=5, column=0, sticky=NE)
+
         self.configure(background='black')
 
     def updateGUI(self):
@@ -167,7 +189,7 @@ class GUI(Frame):
                     weekday += timedelta(days=1)
                     counter += 1
 
-        GUI.weather_label1.configure(text='•'+weather_today)
+        GUI.weather_label1.configure(text=weather_today)
 
         # Set icon for weather today
         icon_path = 'weather_icons/'
@@ -235,6 +257,17 @@ class GUI(Frame):
 
         window.after(500000, mirror.updateNews)
 
+    def updateCalendar(self):
+        # Do calendar stuff
+        # Update calendar text
+        GUI.calendar_label1.configure(text='Updated calendar info')
+        GUI.calendar_label2.configure(text='Updated calendar info')
+        GUI.calendar_label3.configure(text='Updated calendar info')
+        GUI.calendar_label4.configure(text='Updated calendar info')
+        GUI.calendar_label5.configure(text='Updated calendar info')
+
+        window.after(10000, mirror.updateCalendar)
+
 
 window = Tk()
 window.title("Test window")
@@ -249,4 +282,5 @@ mirror.setupGUI()
 window.after(1000, mirror.updateGUI)
 window.after(1000, mirror.updateWeather)
 window.after(1000, mirror.updateNews())
+window.after(1000, mirror.updateCalendar())
 window.mainloop()
