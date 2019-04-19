@@ -26,7 +26,7 @@ There are a number of libraries that must be installed in order to run the Smart
 * Google oauthlib
 * Google Assistant API (separate script to run on Raspberry Pi)
 
-To install news API:
+To install News API:
 ```
 sudo pip3 install newsapi-python
 ```
@@ -42,5 +42,14 @@ To install Google oauthlib:
 ```
 sudo pip3 install google-auth-oauthlib
 ```
+
+### Configure aaspect ratio for your display
+The SmartMirror.py code launches a GUI using Tkinter, a built in Python library. The GUI is launched in fullscreen mode, with no borders to the window. So, you need to make sure that you configure the aspect ratio to that of your screen so everything scales appropriately.
+
+Within the SmartMirror.py file, change:``` WIDTH = 800
+HEIGHT = 600 ``` to the width and height of your display.
+
+### Set up weather settings to your location
+
 
 ### Set up Google Cloud Project to get API access key
