@@ -14,7 +14,26 @@
 GoogleAPIClient is deprecated so use the [Google API Client Library for Python](https://developers.google.com/api-client-library/python/)
 
 ## Python libraries to install before running
-To access news API:
+There are a number of libraries that must be installed in order to run the SmartMirror. The libraries to install are as follows:
+* News API
+* Forecastiopy for DarkSky API
+* Google API Client
+* Google oauthlib
+* Google Assistant API (separate script to run on Raspberry Pi)
+
+To install news API:
 ```
 sudo pip3 install newsapi-python
+```
+To install Forecastio for DarkSky weather:
+```
+sudo pip3 install forecastiopy
+```
+To install Google API Client library:
+```
+sudo pip3 install --upgrade google-api-python-client
+```
+To install Google oauthlib:
+```
+sudo pip3 install google-auth-oauthlib
 ```
