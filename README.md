@@ -15,6 +15,6 @@ GoogleAPIClient is deprecated so use the [Google API Client Library for Python](
 
 ## Python libraries to install before running
 To access news API:
-'''
+```
 sudo pip3 install newsapi-python
-'''
+```
