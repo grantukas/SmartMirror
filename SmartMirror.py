@@ -24,10 +24,10 @@ class GUI(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
 
-        self.largeFont = tkinter.font.Font(family="PibotoLt", size=70)
-        self.mediumFont = tkinter.font.Font(family="PibotoLt", size=40)
-        self.normalFont = tkinter.font.Font(family="PibotoLt", size=20)
-        self.smallFont = tkinter.font.Font(family="PibotoLt", size=6)
+        self.largeFont = tkinter.font.Font(family="Roboto Light", size=70)
+        self.mediumFont = tkinter.font.Font(family="Roboto Light", size=40)
+        self.normalFont = tkinter.font.Font(family="Roboto Thin", size=20)
+        self.smallFont = tkinter.font.Font(family="Roboto Thin", size=6)
 
     def setupGUI(self):
         self.grid(row=0, column=0)
@@ -37,7 +37,7 @@ class GUI(Frame):
         today_weather_frame = Frame(self, width=400, height=500, bg='black')
         today_weather_frame.grid(row=0, column=0, sticky=W)
         GUI.weather_label1 = Label(today_weather_frame, text="Loading weather...", fg='white', bg='black',
-                                   font=self.normalFont, justify=LEFT)
+                                   font=self.mediumFont, justify=LEFT)
         GUI.weather_label1.grid(row=0, column=0, sticky=NW)
 
         # Frame to hold the forecast
@@ -97,8 +97,19 @@ class GUI(Frame):
         GUI.news_today.grid(row=0, column=0, sticky=W)
 
         GUI.news_label1 = Label(news_frame, text="Loading headlines...", fg='white', bg='black',
-                                   font=self.normalFont, justify=LEFT)
+                                font=self.normalFont, justify=LEFT)
         GUI.news_label1.grid(row=1, column=0, sticky=W)
+
+        GUI.news_label2 = Label(news_frame, text="Loading headlines...", fg='white', bg='black',
+                                font=self.normalFont, justify=LEFT)
+        GUI.news_label2.grid(row=2, column=0, sticky=W)
+        GUI.news_label3 = Label(news_frame, text="Loading headlines...", fg='white', bg='black',
+                                font=self.normalFont, justify=LEFT)
+        GUI.news_label3.grid(row=3, column=0, sticky=W)
+        GUI.news_label4 = Label(news_frame, text="Loading headlines...", fg='white', bg='black',
+                                font=self.normalFont, justify=LEFT)
+        GUI.news_label4.grid(row=4, column=0, sticky=W)
+
 
         # Adjust this width for spacing
         frame_placeholder = Frame(self, width=300, height=10, bg='black')
@@ -156,7 +167,7 @@ class GUI(Frame):
                     weekday += timedelta(days=1)
                     counter += 1
 
-        GUI.weather_label1.configure(text=weather_today)
+        GUI.weather_label1.configure(text='•'+weather_today)
 
         # Set icon for weather today
         icon_path = 'weather_icons/'
@@ -177,31 +188,31 @@ class GUI(Frame):
             temp_icon = temp_icon.subsample(10)
 
             if x == 0:
-                GUI.weather_label2.configure(text=weather_list[x])
+                GUI.weather_label2.configure(text='•'+weather_list[x])
                 GUI.icon_label2.configure(image=temp_icon)
                 GUI.icon_label2.photo = temp_icon
             if x == 1:
-                GUI.weather_label3.configure(text=weather_list[x])
+                GUI.weather_label3.configure(text='•'+weather_list[x])
                 GUI.icon_label3.configure(image=temp_icon)
                 GUI.icon_label3.photo = temp_icon
             if x == 2:
-                GUI.weather_label4.configure(text=weather_list[x])
+                GUI.weather_label4.configure(text='•'+weather_list[x])
                 GUI.icon_label4.configure(image=temp_icon)
                 GUI.icon_label4.photo = temp_icon
             if x == 3:
-                GUI.weather_label5.configure(text=weather_list[x])
+                GUI.weather_label5.configure(text='•'+weather_list[x])
                 GUI.icon_label5.configure(image=temp_icon)
                 GUI.icon_label5.photo = temp_icon
             if x == 4:
-                GUI.weather_label6.configure(text=weather_list[x])
+                GUI.weather_label6.configure(text='•'+weather_list[x])
                 GUI.icon_label6.configure(image=temp_icon)
                 GUI.icon_label6.photo = temp_icon
             if x == 5:
-                GUI.weather_label7.configure(text=weather_list[x])
+                GUI.weather_label7.configure(text='•'+weather_list[x])
                 GUI.icon_label7.configure(image=temp_icon)
                 GUI.icon_label7.photo = temp_icon
             if x == 6:
-                GUI.weather_label8.configure(text=weather_list[x])
+                GUI.weather_label8.configure(text='•'+weather_list[x])
                 GUI.icon_label8.configure(image=temp_icon)
                 GUI.icon_label8.photo = temp_icon
 
@@ -215,19 +226,14 @@ class GUI(Frame):
         news_df = data.drop(columns=['status', 'source', 'sortBy', 'author', 'url', 'urlToImage', 'publishedAt'])
 
         title_list = news_df["title"].tolist()
-        desc_list = news_df["description"].tolist()
+        # desc_list = news_df["description"].tolist()
 
-        head1 = [title_list[0], desc_list[0]]
-        head2 = [title_list[1], desc_list[1]]
-        head3 = [title_list[2], desc_list[2]]
-        head4 = [title_list[3], desc_list[3]]
-        head5 = [title_list[4], desc_list[4]]
-        head6 = [title_list[5], desc_list[5]]
-        head7 = [title_list[6], desc_list[6]]
+        GUI.news_label1.configure(text='•'+title_list[0])
+        GUI.news_label2.configure(text='•'+title_list[1])
+        GUI.news_label3.configure(text='•'+title_list[2])
+        GUI.news_label4.configure(text='•'+title_list[3])
 
-        GUI.news_label1.configure(text=title_list[0])
-
-        window.after(1000, mirror.updateNews)
+        window.after(500000, mirror.updateNews)
 
 
 window = Tk()
