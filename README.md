@@ -20,27 +20,36 @@ To use the SmartMirror, you only need to run the SmartMirror.py code. There are 
 
 ### Python libraries to install before running
 There are a number of libraries that must be installed in order to run the SmartMirror. The libraries to install are as follows:
+* Pandas
 * News API
 * Forecastiopy for DarkSky API
 * Google API Client
 * Google oauthlib
 * Google Assistant API (separate script to run on Raspberry Pi)
+If there are any errors installing, such as "module not found", try installing with pip3.
+If you need elevated permissions to install, run "sudo pip ..."
+
+To install Pandas:
+```
+pip install pandas
+```
 
 To install News API:
 ```
-sudo pip3 install newsapi-python
+pip install newsapi-python
 ```
 To install Forecastio for DarkSky weather:
 ```
-sudo pip3 install forecastiopy
+pip install forecastiopy
+pip install darkskylib
 ```
 To install Google API Client library:
 ```
-sudo pip3 install --upgrade google-api-python-client
+pip install --upgrade google-api-python-client
 ```
 To install Google oauthlib:
 ```
-sudo pip3 install google-auth-oauthlib
+pip install google-auth-oauthlib
 ```
 
 ### Configure width and height for your display
