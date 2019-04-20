@@ -6,6 +6,12 @@ from darksky import forecast
 from datetime import date, timedelta
 import pandas as pd
 from newsapi.articles import Articles
+import datetime
+import pickle
+import os.path
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 
 WIDTH = 800
 HEIGHT = 600
@@ -17,6 +23,9 @@ ORANGE = 33.779638, (-117.853700)
 # News API credentials
 apikey = '455e01c84ca44ff387187f10f202bed3'
 a = Articles(API_KEY=apikey)
+
+# Calendar SCOPES
+SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
 class GUI(Frame):
@@ -259,14 +268,52 @@ class GUI(Frame):
 
     def updateCalendar(self):
         # Do calendar stuff
-        # Update calendar text
-        GUI.calendar_label1.configure(text='Updated calendar info')
-        GUI.calendar_label2.configure(text='Updated calendar info')
-        GUI.calendar_label3.configure(text='Updated calendar info')
-        GUI.calendar_label4.configure(text='Updated calendar info')
-        GUI.calendar_label5.configure(text='Updated calendar info')
+        creds = None
+        if os.path.exists('token.pickle'):
+            with open('token.pickle', 'rb') as token:
+                creds = pickle.load(token)
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    'credentials.json', SCOPES)
+                creds = flow.run_local_server()
+            # Save the credentials for the next run
+            with open('token.pickle', 'wb') as token:
+                pickle.dump(creds, token)
 
-        window.after(10000, mirror.updateCalendar)
+        service = build('calendar', 'v3', credentials=creds)
+
+        # Call the Calendar API
+        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
+        events_result = service.events().list(calendarId='primary', timeMin=now,
+                                              maxResults=7, singleEvents=True,
+                                              orderBy='startTime').execute()
+        events = events_result.get('items', [])
+
+        event_list = []
+        if not events:
+            print('No upcoming events found.')
+        for event in events:
+            event_info = []
+            start = event['start'].get('dateTime', event['start'].get('date'))
+            year = start.find('-')
+            event_date = start[year + 1:year + 6]
+            index = start.find('T')
+            event_time = start[index + 1:index + 6]
+            event_info.append(event['summary'] + ' ' + event_date + ' ' + event_time)
+            event_list.append(event_info)
+
+        # Update calendar text
+        GUI.calendar_label1.configure(text=event_list[0])
+        GUI.calendar_label2.configure(text=event_list[1])
+        GUI.calendar_label3.configure(text=event_list[2])
+        GUI.calendar_label4.configure(text=event_list[3])
+        GUI.calendar_label5.configure(text=event_list[4])
+
+        window.after(5000000, mirror.updateCalendar)
 
 
 window = Tk()
