@@ -26,6 +26,7 @@ There are a number of libraries that must be installed in order to run the Smart
 * Google API Client
 * Google oauthlib
 * Google Assistant API (separate script to run on Raspberry Pi)
+
 If there are any errors installing, such as "module not found", try installing with pip3.
 If you need elevated permissions to install, run "sudo pip ..."
 
