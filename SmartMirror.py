@@ -33,10 +33,10 @@ class GUI(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
 
-        self.largeFont = tkinter.font.Font(family="Roboto Light", size=90)
-        self.mediumFont = tkinter.font.Font(family="Roboto Light", size=40)
-        self.normalFont = tkinter.font.Font(family="Roboto Thin", size=20)
-        self.smallFont = tkinter.font.Font(family="Roboto Thin", size=6)
+        self.largeFont = tkinter.font.Font(family="Piboto Light", size=90)
+        self.mediumFont = tkinter.font.Font(family="Piboto Light", size=40)
+        self.normalFont = tkinter.font.Font(family="Piboto Thin", size=20)
+        self.smallFont = tkinter.font.Font(family="Piboto Thin", size=6)
 
     def setupGUI(self):
         self.grid(row=0, column=0)
@@ -297,14 +297,16 @@ class GUI(Frame):
         if not events:
             print('No upcoming events found.')
         for event in events:
-            event_info = []
+            event_str = ''
             start = event['start'].get('dateTime', event['start'].get('date'))
             year = start.find('-')
+            print(start)
             event_date = start[year + 1:year + 6]
             index = start.find('T')
-            event_time = start[index + 1:index + 6]
-            event_info.append(event['summary'] + ' ' + event_date + ' ' + event_time)
-            event_list.append(event_info)
+            # event_time = start[index + 1:index + 6]
+            # event_date + ' ' + event_time
+            event_str += event['summary'] + ' ' + event_date + ' '
+            event_list.append(event_str)
 
         # Update calendar text
         GUI.calendar_label1.configure(text=event_list[0])
