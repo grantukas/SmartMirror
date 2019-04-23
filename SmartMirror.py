@@ -302,7 +302,7 @@ class GUI(Frame):
             year = start.find('-')
             print(start)
             event_date = start[year + 1:year + 6]
-            # index = start.find('T')
+            #index = start.find('T')
             # event_time = start[index + 1:index + 6]
             # event_date + ' ' + event_time
             event_str += event['summary'] + ' ' + event_date + ' '
