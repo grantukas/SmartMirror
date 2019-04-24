@@ -13,8 +13,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-WIDTH = 800
-HEIGHT = 600
+WIDTH = 1920
+HEIGHT = 1080
 
 # Weather API credentials
 key = '93a522f375502ea4e4a091c06d034ff1'
@@ -33,10 +33,9 @@ class GUI(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
 
-        self.largeFont = tkinter.font.Font(family="Piboto Light", size=90)
-        self.mediumFont = tkinter.font.Font(family="Piboto Light", size=40)
-        self.normalFont = tkinter.font.Font(family="Piboto Thin", size=20)
-        self.smallFont = tkinter.font.Font(family="Piboto Thin", size=6)
+        self.largeFont = tkinter.font.Font(family="Piboto", size=70)
+        self.mediumFont = tkinter.font.Font(family="Piboto", size=40)
+        self.normalFont = tkinter.font.Font(family="Piboto Light", size=20)
 
     def setupGUI(self):
         self.grid(row=0, column=0)
@@ -49,7 +48,7 @@ class GUI(Frame):
                                    font=self.mediumFont, justify=LEFT)
         GUI.weather_label1.grid(row=0, column=0, sticky=NW)
 
-        # Frame to hold the forecast
+        # Frame and labels to hold the forecast
         weather_news_frame = Frame(self, width=200, height=500, bg='black')
         weather_news_frame.grid(row=1, column=0, sticky=W)
 
@@ -121,7 +120,7 @@ class GUI(Frame):
 
 
         # Adjust this width for spacing
-        frame_placeholder = Frame(self, width=200, height=10, bg='black')
+        frame_placeholder = Frame(self, width=WIDTH/6, height=10, bg='black')
         frame_placeholder.grid(row=0, column=1)
 
         # Time frame to hold time & date in grid
@@ -205,7 +204,7 @@ class GUI(Frame):
         today_icon += '.gif'
         icon_path += today_icon
         icon = PhotoImage(file=icon_path)
-        icon = icon.subsample(10)
+        icon = icon.subsample(9)
         GUI.icon_label.configure(image=icon)
         GUI.icon_label.photo = icon
 
@@ -216,7 +215,7 @@ class GUI(Frame):
             temp_icon_name += '.gif'
             temp_icon_path += temp_icon_name
             temp_icon = PhotoImage(file=temp_icon_path)
-            temp_icon = temp_icon.subsample(10)
+            temp_icon = temp_icon.subsample(15)
 
             if x == 0:
                 GUI.weather_label2.configure(text='•'+weather_list[x])
@@ -257,7 +256,6 @@ class GUI(Frame):
         news_df = data.drop(columns=['status', 'source', 'sortBy', 'author', 'url', 'urlToImage', 'publishedAt'])
 
         title_list = news_df["title"].tolist()
-        # desc_list = news_df["description"].tolist()
 
         GUI.news_label1.configure(text='•'+title_list[0])
         GUI.news_label2.configure(text='•'+title_list[1])
@@ -267,7 +265,6 @@ class GUI(Frame):
         window.after(500000, mirror.updateNews)
 
     def updateCalendar(self):
-        # Do calendar stuff
         creds = None
         if os.path.exists('token.pickle'):
             with open('token.pickle', 'rb') as token:
@@ -300,12 +297,9 @@ class GUI(Frame):
             event_str = ''
             start = event['start'].get('dateTime', event['start'].get('date'))
             year = start.find('-')
-            print(start)
+            start_day = datetime.datetime.strptime(start, '%Y-%m-%d').strftime('%a %b %d')
             event_date = start[year + 1:year + 6]
-            #index = start.find('T')
-            # event_time = start[index + 1:index + 6]
-            # event_date + ' ' + event_time
-            event_str += event['summary'] + ' ' + event_date + ' '
+            event_str += event['summary'] + ' | ' + start_day
             event_list.append(event_str)
 
         # Update calendar text
@@ -317,14 +311,24 @@ class GUI(Frame):
 
         window.after(5000000, mirror.updateCalendar)
 
+def close_escape(event=None):
+    print('Smart mirror closed')
+    window.destroy()
+
 
 window = Tk()
-window.title("Test window")
-window.geometry('800x600')
+window.title("Smart Mirror")
+window.geometry('1920x1080')
 window.configure(background='black')
 
-#This removes borders from GUI
-#window.overrideredirect(1)
+#Removes borders from GUI and implements quit via esc
+window.overrideredirect(1)
+window.overrideredirect(0)
+window.attributes("-fullscreen", True)
+window.wm_attributes("-topmost", 1)
+window.focus_set()
+
+window.bind("<Escape>", close_escape)
 
 mirror = GUI(window)
 mirror.setupGUI()
