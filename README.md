@@ -78,24 +78,24 @@ Within the SmartMirror.py file, change the variable ORANGE:
 ```
 ORANGE = {LATITUDE}, {LONGITUDE}
 ```
-Replace tha values {LATITUDE} and {LONGITUDE} with that of your location.
+Replace the values {LATITUDE} and {LONGITUDE} with that of your location.
 
 ### After installing all the libraries, you are ready to run!
 Be sure you are in the SmartMirror directory, and run the SmartMirror.py program with:
 ```
-pip3 SmartMirror.py
+python3 SmartMirror.py
 ```
-For the first launch, you will be asked by the Google Auth API to connect to your Google Account to access your Google Calendar information. The promp will look something like:
+For the first launch, you will be asked by the Google Auth API to connect to your Google Account to access your Google Calendar information. The prompt will look something like:
 ```
 Please visit this URL to authorize this application: https://accounts.google.com/o/oauth2/auth?re........
 ```
 Copy and paste the link into your browser and sign into your Google Account. Allow Quickstart permission to access your calendar (so it can get your upcoming events on your calendar). Once completed, it will tell you to close the window, and the SmartMirror program will launch!
 
-If you are not running this on a Raspberry Pi 3 B+, then you can stop here. If you are running this on a Raspberry Pi but don't want Google Assistant, then you can stop here. Enjoy your new Smart Mirror!
+If you are not running this on a Raspberry Pi 3 B+, then you can stop here. If you are running this on a Raspberry Pi but don't want Google Assistant, you can also stop here. Enjoy your new Smart Mirror!
 
 
 
-### Set up Google Cloud Project to get API access key (RASPBERRY PI ONLY)
+## Set up Google Cloud Project to get API access key (RASPBERRY PI ONLY)
 Please follow this link to get Google Assistant set up on your Raspberry Pi 3 B+: [Voice Activated Google Assistant](https://www.novaspirit.com/2017/05/23/voice-activated-google-assistant-raspberry-pi/)
 
 NOTE: The specific development library that uses for the Assistant SDK only work on the Raspberry Pi 3 B+. It will NOT work on any other Raspberry Pi model.
