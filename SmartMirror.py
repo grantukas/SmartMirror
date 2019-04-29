@@ -326,7 +326,7 @@ def close_escape(event=None):
 
 window = Tk()
 window.title("Smart Mirror")
-window.geometry('2450x1080')
+window.geometry('1920x1080')
 window.configure(background='black')
 
 #Removes borders from GUI and implements quit via esc
