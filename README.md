@@ -32,25 +32,26 @@ If you need elevated permissions to install, run "sudo pip ..."
 
 To install Pandas:
 ```
-pip install pandas
+pip3 install pandas
 ```
 
 To install News API:
 ```
-pip install newsapi-python
+pip3 install newsapi-python
+pip3 install newsapi
 ```
 To install Forecastio for DarkSky weather:
 ```
-pip install forecastiopy
-pip install darkskylib
+pip3 install forecastiopy
+pip3 install darkskylib
 ```
 To install Google API Client library:
 ```
-pip install --upgrade google-api-python-client
+pip3 install --upgrade google-api-python-client
 ```
 To install Google oauthlib:
 ```
-pip install google-auth-oauthlib
+pip3 install google-auth-oauthlib
 ```
 
 ### Configure width and height for your display
