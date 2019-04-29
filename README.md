@@ -98,4 +98,4 @@ If you are not running this on a Raspberry Pi 3 B+, then you can stop here. If y
 ## Set up Google Cloud Project to get API access key (RASPBERRY PI ONLY)
 Please follow this link to get Google Assistant set up on your Raspberry Pi 3 B+: [Voice Activated Google Assistant](https://www.novaspirit.com/2017/05/23/voice-activated-google-assistant-raspberry-pi/)
 
-NOTE: The specific development library that uses for the Assistant SDK only work on the Raspberry Pi 3 B+. It will NOT work on any other Raspberry Pi model.
+NOTE: The Assistant SDK with voice activation only works on the Raspberry Pi 3 B+. It will NOT work on any other Raspberry Pi model. If you do not want voice activation/have an older Raspberry Pi, you can activate Assistant with the keyboard or a wired-in button. However, this is a topic for another tutorial.
