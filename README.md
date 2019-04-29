@@ -70,6 +70,14 @@ window.geometry('800x600')
 Replace the values 800 and 600 with the same width and height values that you have above.
 Be sure to leave it in the format '800x600'.
 
+If you cannot see the clock and calendar information in the upper-right corner(or it is cut off), you can manually adjust the spacing so that the elements are in the frame. To do so, find line 122 in the SmartMirror.py code, where this block of code lives:
+```
+# Adjust this width for spacing
+frame_placeholder = Frame(self, width=WIDTH/8, height=10, bg='black')
+frame_placeholder.grid(row=0, column=1)
+```
+You can change the frame_placeholder width=WIDTH/8 value. For example, if you divide the width by a higher number, such as 8 or 10, it will make the spacing shorter, bringing the time and calendar elements closer to the middle of the frame. Conversely, if you make the value smaller, like 2 or 3, then the spacing will be greater. You can play with values to see what suits your aspect ratio the best.
+
 ### OPTIONAL- Set weather location to your location
 The location for weather forecasts can be changed to be something other than Orange, CA.
 To change the location, you must get the latitude and longitude of your location which can be done easily with [LatLong.net](https://www.latlong.net/)
