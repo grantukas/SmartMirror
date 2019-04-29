@@ -120,7 +120,7 @@ class GUI(Frame):
 
 
         # Adjust this width for spacing
-        frame_placeholder = Frame(self, width=WIDTH/6, height=10, bg='black')
+        frame_placeholder = Frame(self, width=WIDTH/2.65, height=10, bg='black')
         frame_placeholder.grid(row=0, column=1)
 
         # Time frame to hold time & date in grid
@@ -246,7 +246,7 @@ class GUI(Frame):
                 GUI.icon_label8.configure(image=temp_icon)
                 GUI.icon_label8.photo = temp_icon
 
-        window.after(500000, mirror.updateWeather)
+        window.after(50000000, mirror.updateWeather)
 
     def updateNews(self):
         data = a.get(source="the-new-york-times", sort_by='top')
@@ -256,13 +256,21 @@ class GUI(Frame):
         news_df = data.drop(columns=['status', 'source', 'sortBy', 'author', 'url', 'urlToImage', 'publishedAt'])
 
         title_list = news_df["title"].tolist()
+        title_new_list = []
+        for x in range(0, 4):
+            title = title_list[x]
+            title_new = ''
+            if(len(title) >= 50):
+                title_new += title[:50] + '-\n' + title[50:]
+            
+            title_new_list.append(title_new)
+        
+        GUI.news_label1.configure(text='•'+title_new_list[0])
+        GUI.news_label2.configure(text='•'+title_new_list[1])
+        GUI.news_label3.configure(text='•'+title_new_list[2])
+        GUI.news_label4.configure(text='•'+title_new_list[3])
 
-        GUI.news_label1.configure(text='•'+title_list[0])
-        GUI.news_label2.configure(text='•'+title_list[1])
-        GUI.news_label3.configure(text='•'+title_list[2])
-        GUI.news_label4.configure(text='•'+title_list[3])
-
-        window.after(500000, mirror.updateNews)
+        window.after(50000000, mirror.updateNews)
 
     def updateCalendar(self):
         creds = None
@@ -309,7 +317,7 @@ class GUI(Frame):
         GUI.calendar_label4.configure(text=event_list[3])
         GUI.calendar_label5.configure(text=event_list[4])
 
-        window.after(5000000, mirror.updateCalendar)
+        window.after(500000000, mirror.updateCalendar)
 
 def close_escape(event=None):
     print('Smart mirror closed')
@@ -318,7 +326,7 @@ def close_escape(event=None):
 
 window = Tk()
 window.title("Smart Mirror")
-window.geometry('1920x1080')
+window.geometry('2450x1080')
 window.configure(background='black')
 
 #Removes borders from GUI and implements quit via esc
