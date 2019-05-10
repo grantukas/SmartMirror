@@ -16,7 +16,7 @@ GoogleAPIClient is deprecated so use the [Google API Client Library for Python](
 ## Summary of the SmartMirror project
 The goal of this project is to create a simple, Python-based smart mirror. We chose to design a smart mirror because it can be more seamlessly integrated within a home, as opposed to a smart speaker, and still has the same functionality along with the added benefits of a GUI.
 
-To use the SmartMirror, you only need to run the SmartMirror.py code. There are libraries that need to be installed and settings that can be customized before running. A comprehensive build guide is below.
+To use the SmartMirror, you only need to run the SmartMirror.py code. There are libraries that need to be installed and settings that can be customized before running. A comprehensive build guide is below. Please be sure to run the code using Python 3.
 
 ### Python libraries to install before running
 There are a number of libraries that must be installed in order to run the SmartMirror. The libraries to install are as follows:
