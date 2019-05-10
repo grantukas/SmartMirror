@@ -1,8 +1,9 @@
 ## Contributions 
 - Researched, iplemented and setup the News API 
   - The News API was implemented using a data science library, Pandas, to easily pull the current news headlines and display 
- them in a readable format. 
-  - There were a few hiccups with the News API, to begin with, the module was setup to pull from BBC world news, so that had to be changed 
+ them in a readable format.
+  - My knowledge of pandas from data science made it much easier to reformat the news and display what would fit on the mirror. 
+  - There were a few hiccups with the News API, to begin with, the module was setup to pull from BBC world new s, so that had to be changed, to make use of other news sources, such as the New York Times or Various Tech Publications. 
   - The formatting in Pandas was kind of a headache, because I am used to using pandas primarily in jupyter notebooks. 
   - Once that was all ironed out the News displayed properly and I was very pleased with the output. 
  
