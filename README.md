@@ -61,7 +61,7 @@ pip3 install google-auth-oauthlib
 ### Configure width and height for your display
 The SmartMirror.py code launches a GUI using Tkinter, a built in Python library. The GUI is launched in fullscreen mode, with no borders to the window. So, you need to make sure that you configure the aspect ratio to that of your screen so everything scales appropriately.
 
-Within the SmartMirror.py file, change the variables WIDTH and HEIGHT:
+Within the SmartMirror.py file, use your favorite text editor to change the variables WIDTH and HEIGHT:
 ```
 WIDTH = X
 HEIGHT = Y
