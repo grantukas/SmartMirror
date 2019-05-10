@@ -89,7 +89,7 @@ ORANGE = {LATITUDE}, {LONGITUDE}
 Replace the values {LATITUDE} and {LONGITUDE} with that of your location.
 
 ### After installing all the libraries, you are ready to run!
-Be sure you are in the SmartMirror directory, and run the SmartMirror.py program with:
+Be sure you are in the SmartMirror directory, and run the SmartMirror.py program using Python 3 with:
 ```
 python3 SmartMirror.py
 ```
