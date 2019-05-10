@@ -6,8 +6,9 @@
   - The formatting in Pandas was kind of a headache, because I am used to using pandas primarily in jupyter notebooks. 
   - Once that was all ironed out the News displayed properly and I was very pleased with the output. 
  
-- Researched, implemented and sestup the google Calandar API 
-  - The calandar API was simple to implement, google had a quickstart module that was simple to implement and format. 
+- Researched, implemented and setup the google Calandar API 
+  - The calandar API was simple to implement, google had a quickstart module that was simple to implement and format.
+  - Google requires a sign in upon launching the application and from there it is very straight forward it prints the daily tasks and objectives 
 
 
 
