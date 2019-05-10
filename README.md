@@ -97,7 +97,7 @@ For the first launch, you will be asked by the Google Auth API to connect to you
 ```
 Please visit this URL to authorize this application: https://accounts.google.com/o/oauth2/auth?re........
 ```
-Copy and paste the link into your browser and sign into your Google Account. Allow Quickstart permission to access your calendar (so it can get your upcoming events on your calendar). Once completed, it will tell you to close the window, and the SmartMirror program will launch! If at any time you wish to exit, hitting the escape button <ESC> will stop and close the program.
+Copy and paste the link into your browser and sign into your Google Account. Allow Quickstart permission to access your calendar (so it can get your upcoming events on your calendar). Once completed, it will tell you to close the window, and the SmartMirror program will launch! If at any time you wish to exit, hitting the escape button (ESC) will stop and close the program.
 
 If you are not running this on a Raspberry Pi 3 B+, then you can stop here. If you are running this on a Raspberry Pi but don't want Google Assistant, you can also stop here. Enjoy your new Smart Mirror!
 
