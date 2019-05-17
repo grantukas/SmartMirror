@@ -1,7 +1,7 @@
 # SmartMirror
 
 ![](images/SmartMirror.png)
-![](images/SmartMirror2.jpg)
+<image src="images/SmartMirror2.jpg" width="300">
 
 ## Summary of the SmartMirror project
 The goal of this project is to create a simple, Python-based smart mirror. We chose to design a smart mirror because it can be more seamlessly integrated within a home, as opposed to a smart speaker, and still has the same functionality along with the added benefits of a GUI.
