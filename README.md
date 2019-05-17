@@ -1,6 +1,6 @@
 # SmartMirror
 
-![](images/SmartMirror.png)
+![](images/SmartMirror.jpg)
 <image src="images/SmartMirror2.jpg" width="300">
 
 ## Summary of the SmartMirror project
