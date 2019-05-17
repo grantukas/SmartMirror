@@ -304,11 +304,14 @@ class GUI(Frame):
         for event in events:
             event_str = ''
             start = event['start'].get('dateTime', event['start'].get('date'))
+            start = start[0:10] # Remove unnecessary characters at end of string
             year = start.find('-')
             start_day = datetime.datetime.strptime(start, '%Y-%m-%d').strftime('%a %b %d')
             event_date = start[year + 1:year + 6]
-            event_str += event['summary'] + ' | ' + start_day
+            summary = event['summary'].encode('ascii', 'ignore').decode('ascii') # Remove emojis
+            event_str += summary + ' | ' + start_day
             event_list.append(event_str)
+
 
         # Update calendar text
         GUI.calendar_label1.configure(text=event_list[0])
