@@ -1,20 +1,7 @@
 # SmartMirror
 
 ![](images/SmartMirror.png)
-![Working prototype](images/SmartMirror2.jpg)
-
-[Tkinter display GIF](https://www.daniweb.com/programming/software-development/code/216550/tkinter-to-put-a-gif-image-on-a-canvas-python)
-
-[Tkinter documentation](https://effbot.org/tkinterbook/tkinter-index.htm)
-
-[Dark Sky API docs](https://darksky.net/dev/docs)
-
-[News Api](http://www.rychdata.com/the-news-api-requesting-live-headlines-with-python.html)
-
-[Calander API](https://developers.google.com/calendar/quickstart/python)
-
-### Issues with GoogleAPIClient
-GoogleAPIClient is deprecated so use the [Google API Client Library for Python](https://developers.google.com/api-client-library/python/)
+![](images/SmartMirror2.jpg)
 
 ## Summary of the SmartMirror project
 The goal of this project is to create a simple, Python-based smart mirror. We chose to design a smart mirror because it can be more seamlessly integrated within a home, as opposed to a smart speaker, and still has the same functionality along with the added benefits of a GUI.
@@ -118,3 +105,18 @@ If you are not running this on a Raspberry Pi 3 B+, then you can stop here. If y
 Please follow this link to get Google Assistant set up on your Raspberry Pi 3 B+: [Voice Activated Google Assistant](https://www.novaspirit.com/2017/05/23/voice-activated-google-assistant-raspberry-pi/)
 
 NOTE: The Assistant SDK with voice activation only works on the Raspberry Pi 3 B+. It will NOT work on any other Raspberry Pi model. If you do not want voice activation/have an older Raspberry Pi, you can activate Assistant with the keyboard or a wired-in button. However, this is a topic for another tutorial.
+
+### Extra info and sources
+
+[Tkinter display GIF](https://www.daniweb.com/programming/software-development/code/216550/tkinter-to-put-a-gif-image-on-a-canvas-python)
+
+[Tkinter documentation](https://effbot.org/tkinterbook/tkinter-index.htm)
+
+[Dark Sky API docs](https://darksky.net/dev/docs)
+
+[News Api](http://www.rychdata.com/the-news-api-requesting-live-headlines-with-python.html)
+
+[Calander API](https://developers.google.com/calendar/quickstart/python)
+
+### Issues with GoogleAPIClient
+GoogleAPIClient is deprecated so use the [Google API Client Library for Python](https://developers.google.com/api-client-library/python/)
