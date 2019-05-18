@@ -10,7 +10,7 @@ To use the SmartMirror, you only need to run the SmartMirror.py code. There are 
 
 
 ### Python libraries to install before running
-There are a number of libraries that must be installed in order to run the SmartMirror. The libraries to install are as follows:
+There are a number of libraries that must be installed in order to run the SmartMirror. If you already have Pandas or any other libraries, please make sure they are updated to the latest version. The libraries to install are as follows:
 * Pandas
 * News API
 * Forecastiopy for DarkSky API
